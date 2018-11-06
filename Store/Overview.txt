@@ -1,0 +1,13 @@
+﻿När jag skrev koden för butiken ansåg jag att de viktigaste delarna i programmet var att kunna hantera produkter, uppvisningen av produkter, rabattkoder, att spara varukorgen och att bygga upp GUIt. De 5 kategorierna har fått en varsin klass:
+Product – en klass för att bilda instanser av produkterna som säljs i butiken.
+CartInfo – Ärver av Product, men innehåller extra information om hur många produkter som finns i varukorgen, och hur produkten presenteras. Metoden för ArticlePanel finns i klassen CartInfo. Där skapas en panel för varje produkt, och finns alltså tillgänglig som en instans närhelst GUIt kräver at den ska visas. 
+Discount – Som bildar instanser av rabatterna, med koden, en beskrivning av koden, hur mycket rabatt och om den är i procent eller en fix summa.
+Cart – Klass som hanterar information som bör läsas in i en sparad korg. Serienummer och antal av en vara.
+MyForm – En klassiker, den klass som utför arbete, den som kallas av Program.cs
+I MyForm finns de flesta variabler som instansvariabler.
+I MyForm skapar jag TableLaoutsPaneler, de objekt som aldrig ändras och bara finns en variant av, och dessutom lägger jag ihop de objekt jag skapat hittills till ett GUI som ser ut som en affär. I vissa fall en panel i en panel i en panel i en panel. Allt för att få butiken att bete sig som jag vill.
+För att skapa paneler till Windows Form har koden metoder, så en panel skapas aldrig där den använd, utan den ropar på motsvarande metod. 
+Utöver de metoder som skapar paneler har jag en handfull andra metoder och events. Av dem finns det några som är lite mer intressanta.
+En metod som anropas på flera ställen i koden är SumAndDiscountCart. Den anropas för att uppdatera information om vad produkterna kostar, hur stor rabatten är och summan av korgen. Den anropas när en vara läggs i korgen, när antalet av en vara ändras, när en rabatt läggs till eller tas bort, och när kvitto skrivs ut.
+När knappen ”Save Cart” klickas sparas det som finns i varukorgen. Den information som sparas är endast artikelnumret och antal, då kan man vid eventuell expansion av butiken lättare fixa inläsning av filen, och den är inte full med massa data som inte används, utan man jämför den med produkter som finns i sortimentet. 
+Ett problem som uppstod under kodningen var att inkrementeringen av produkterna i varukorgen inte alltid var 1. Lösningen blev att lägga till en bool i CartInfo, BeenClicked som håller information om varan någon gång lagts i korgen, och om den har det, behöver klickevent för Add- och SubtractQuantity inte läggas till igen.
